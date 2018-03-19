@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WebLeertaak</title>
+      <!--Call external stylesheet and javascript file-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="progress.js"></script>
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="/src/HU_polymer-app/footer-element/footer-element.html">
+    <link rel="import" href="src/HU_polymer-app/voortgang-main/voortgang-main.html">
+
+  </head>
+  <body>
+  <!--Navigation in list-->
+  <div id="menuBar">
+    <div id="navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="settings.html">Instellingen</a></li>
+        <li><a class="active" href="#">Voortgang</a></li>
+      </ul>
+    </div>
+    <!--user bar with image and name-->
+    <div id="user">
+      <img src="images/user.png" alt="user">
+      <p> Joost</p>
+    </div>
+  </div>
+    <voortang-element></voortgang-element>
+    <!--create the footer-->
+  <footer id="footer">
+    <footer-element></footer-element>
+
+  </footer>
+
+  </body>
+</html>

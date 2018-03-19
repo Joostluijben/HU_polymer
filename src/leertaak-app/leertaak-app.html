@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../HU_polymer-app/home-main/home-main.html">
+<link rel="import" href="../HU_polymer-app/profiel-main/profiel-main.html">
+<link rel="import" href="../HU_polymer-app/voortgang-main/voortgang-main.html">
+<link rel="import" href="../HU_polymer-app/footer-element/footer-element.html">
+
+
+<dom-module id="leertaak-app">
+  <template>
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/" data="{{routeData}}" tail="{{routeTail}}" active="{{active}}"></app-route>
+    <h1>[[route.path]]</h1>
+    <header>
+      <iron-selector selected="{{keuze}}" attr-for-selected="menuoptie">
+        <a menuoptie="home" >Home</a>
+        <a menuoptie="profiel" >Profiel</a>
+        <a menuoptie="voortgang">Voortgang</a>
+      </iron-selector>
+    </header>
+    <h1>Je hebt gekozen voor [[keuze]]</h1>
+    <iron-pages selected="{{keuze}}" attr-for-selected="pagina" fallback-selection="home">
+      <home-element pagina="home"></home-element>
+      <profiel-element pagina="profiel"></profiel-element>
+      <voortang-element pagina="voortgang"></voortang-element>
+    </iron-pages>
+    <footer-element></footer-element>
+  </template>
+  <script>
+  class LeertaakApp extends Polymer.Element {
+    static get is() {return 'leertaak-app';}
+    static get properties() {
+      return {
+        routeData: String,
+        routeTail: String,
+        active: Boolean
+      }
+    }
+  }
+  window.customElements.define(LeertaakApp.is, LeertaakApp);
+
+  </script>
+</dom-module>

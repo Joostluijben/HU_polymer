@@ -1,0 +1,25 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="footer-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <p id="footerTop"><i>Deze opdracht is gemaakt in het kader van het vak Analyse &#38; User interfacing</i></p>
+      <p><i>Auteur: Joost Luijben <span id="footerRight">Datum: 5-2-2018</span></i></p>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class FooterElement extends Polymer.Element {
+      static get is() { return 'footer-element'; }
+    }
+
+    window.customElements.define(FooterElement.is, FooterElement);
+  </script>
+</dom-module>

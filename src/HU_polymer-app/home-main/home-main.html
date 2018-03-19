@@ -1,0 +1,68 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/geo-location/geo-location.html">
+<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+
+
+<dom-module id="home-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-ajax id="weather" method="GET"
+    url="http://api.openweathermap.org/data/2.5/weather"
+    handle-as="json"
+    on-response="haalWeerOp"></iron-ajax>
+    <!--<paper-input label="latitude" value={{latitude}}></paper-input>
+    <paper-input label="longitude" value="{{longitude}}"></paper-input>-->
+    <paper-button on-click="clickHandler">GO</paper-button>
+    <p id="actualWeather"></p>
+    <div id="content">
+      <h1>Voortgansmonitor</h1>
+      <p style="display: none">IK BEN ONZICHTBAAR</p>
+      <img src="images/hu.png" id="HULogo" alt="HU_image"/>
+      <p>Deze persoonlijke voortgangspagina dient je inzicht te geven in je studievoortgang.
+      Op de <a href="settings.html">instellingen</a> pagina kun je informatie omtrent je persoon instellen<br>
+
+      Op de <a href="progress.html">voortgang</a> pagina kun je vervolgens je vakken invullen, het aantal ECTS ervan
+      en de datum waarop je het vak hebt behaald.<br>
+      Door op de knop bereken studietempo te klikken zal vervolgens een dialoogvenster verschijnen dat op basis
+      van ingevoerde informatie je studietempo berekent.</p>
+      <p>Deze versie van de voortgangsmonitor is echter nog beperkt in zijn functionaliteit, omdat het niet zo
+      zeer om de werking ervan gaat, maar veel meer om goede omzetting van een wireframe naar een HTML, CSS EN JS.</p>
+      <img src="images/home.png" id="homeImg" alt="homeImage"/>
+    </div>
+  </template>
+
+  <script>
+  /**
+   * @customElement
+   * @polymer
+   */
+    class HomeElement extends Polymer.Element {
+      static get is() { return 'home-element'; }
+      static get properties() {
+        return {
+          longitude: Number,
+          latitude: Number
+        }
+      }
+      haalWeerOp(request_confirmed) {
+        this.$.actualWeather.innerHTML = request_confirmed.detail.response.weather[0].description;
+        console.log(request_confirmed.detail.response.weather[0].description);
+      }
+      clickHandler() {
+        this.$.weather.set('params', {
+          "id":"2744248",
+          "appid":"fdc66267f0b14a284e76e122e0cd59d2"
+        });
+        this.$.weather.generateRequest();
+      }
+    }
+
+  window.customElements.define(HomeElement.is, HomeElement);
+  </script>
+</dom-module>

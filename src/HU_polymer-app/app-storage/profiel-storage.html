@@ -1,0 +1,23 @@
+<link rel="import" href="../../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="profiel-storage">
+  <template>
+    <button onclick="getValues()"></button>
+  </template>
+  <app-localstorage-document key="naam" data="{{naam}}" id="values"></app-localstorage-document>
+  <script>
+  class ProfielStorage extends Polymer.Element {
+    static get is() { return 'profiel-storage'; }
+    static get properties() {
+      return {
+        naam: String
+      };
+    }
+    getValues() {
+      return this.$.values.getStoredValues("naam");
+    }
+  }
+  window.customElements.define(ProfielStorage.is, ProfielStorage);
+  </script>
+</dom-module>

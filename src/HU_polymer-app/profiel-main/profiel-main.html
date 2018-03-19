@@ -1,0 +1,145 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="profiel-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div id="content">
+    <h1>Instellingen</h1>
+    <form id="settings">
+      <!--create left side of the form-->
+    <div id='leftForm'>
+      <paper-input label="Voornaam"></paper-input>
+      <paper-input label="Achternaam"></paper-input>
+      <paper-input label="Adres"></paper-input>
+      <paper-input label="email"></paper-input>
+      <paper-input label="Telefoonnummer"></paper-input>
+      <paper-radio-group>
+        <paper-radio-button name="man">Man</paper-radio-button>
+        <paper-radio-button name="vrouw">Vrouw</paper-radio-button>
+        <paper-radio-button name="other">Anders</paper-radio-button>
+      </paper-radio-group>
+      <paper-input label="Studentnummer"></paper-input>
+      <paper-dropdown-menu label="Studierichting">
+        <paper-listbox slot="dropdown-content" selected="1">
+          <paper-item>BIM</paper-item>
+          <paper-item>SNE</paper-item>
+          <paper-item>SIE</paper-item>
+          <paper-item>TI</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <p><label class="field" for="firstName">Voornaam:</label><input type="text" id="firstName"/></p>
+      <p><label class="field" for="sirName">Achternaam:</label><input type="text" id="sirName"/></p>
+      <p><label class="field" for="address">Adres:</label><input type="text" id="address"/></p>
+      <p><label class="field" for="email">Email:</label><input type="email" id="email"/></p>
+      <p><label class="field" for="telefoonnumer">Telefoonnummer:</label><input type="number" id="telephonenumerb"/></p>
+      <p>Geslacht: </p>
+
+      <div id="inputMale">
+        <input class="gender" type="radio" name="male" id="male">Man<label for="male"></label>
+      </div>
+
+      <div id="inputFemale">
+        <input class="gender" type="radio" name="female" id="female">Vrouw<label for="female"></label>
+      </div>
+
+      <input class="gender" type="radio" name="other" id="other">Anders<label for="other"></label>
+      <p><label class="field" for="birthday">Geboortedatum:</label><input type="date" id="birthday"/></p>
+    </div>
+    <!--create right side of the form-->
+    <div id='rightForm'>
+      <p><label class="field" for="studentNumber">Studentnummer:</label><input type="text" id="studentNumber"/></p>
+      <p><label class="field" for="class">Klas:</label>
+      <select id="class">
+        <option>V1A</option>
+        <option>V1B</option>
+        <option>V1C</option>
+        <option>V1D</option>
+        <option>V1E</option>
+      </select>
+      </p>
+      <p>Gekozen studierichting:</p>
+      <input class="radio" type="radio" name="study" id="SNE">SNE<label for="SNE"></label>
+      <input class="radio" type="radio" name="study" id="BIM">BIM<label for="BIM"></label>
+      <input class="radio" type="radio" name="study" id="SIE">SIE<label for="SIE"></label>
+      <input class="radio" type="radio" name="study" id="TI">TI<label for="TI"></label>
+
+      <p>Foto: </p>
+      <img src="images/defaultUser.jpg" alt="userImage">
+      <button id="change">Change</button>
+      </div>
+    </form>
+  </div>
+  </template>
+
+  <script>
+  /**
+   * @customElement
+   * @polymer
+   */
+    class ProfielElement extends Polymer.Element {
+      static get is() { return 'profiel-element'; }
+      static get properties() {
+        return {
+          voornaam: {
+            type: String,
+            value: 'Voornaam'
+          },
+          achternaam: {
+            type: String,
+            value: "Achternaam"
+          },
+          adres: {
+            type: String,
+            value: "Adres"
+          },
+          email: {
+            type: String,
+            value: "Email"
+          },
+          telefoonnumer: {
+            type: String,
+            value: "Telefoonnummer"
+          },
+          geslacht: {
+            type: String,
+            value: "Geslacht"
+          },
+          geboortedatum: {
+            type: String,
+            value: "Geboortedatum"
+          },
+          fotofilename: {
+            type: String,
+            value: "Fotobestandsnaam"
+          },
+          studentnr: {
+            type: String,
+            value: "Studentnummer"
+          },
+          klas: {
+            type: String,
+            value: "Klas"
+          },
+          studierichting: {
+            type: String,
+            value: "Studierichting"
+          }
+        }
+      };
+
+  }
+
+
+  window.customElements.define(ProfielElement.is, ProfielElement);
+  </script>
+</dom-module>

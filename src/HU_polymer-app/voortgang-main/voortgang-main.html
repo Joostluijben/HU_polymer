@@ -1,0 +1,182 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../bower_components/vaadin-date-picker/vaadin-date-picker.html">
+
+
+<dom-module id="voortang-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <vaadin-grid items="[[cursussen]]">
+      <vaadin-grid-column>
+        <template class="header">
+          <vaadin-grid-sorter path="vakcode">Vakcode</vaadin-grid-sorter>
+        </template>
+
+        <template>
+          <paper-input value="{{item.vakcode}}"></paper-input>
+        </template>
+
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">
+          <vaadin-grid-sorter path="ECTS">ECTS</vaadin-grid-scroller>
+        </template>
+
+        <template>
+          <paper-input value="{{item.ECTS}}"></paper-input>
+        </template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">
+          <vaadin-grid-sorter path="datum">datum</vaadin-grid-scroller>
+        </template>
+
+        <template>
+          <paper-input value="{{item.datum}}"></paper-input>
+        </template>
+      </vaadin-grid-column>
+    </vaadin-grid>
+
+    <div>
+      <paper-button raised on-click="showStudieTempo">Bereken studietempo</paper-button>
+    </div>
+      <paper-dialog id="myDialoogVenster">
+        <br/>
+        Je hebt tot nu toe: {{sum}} ECTS behaald.Je huidge studietempo is: {{pace}} ECTS / mnd.<br/>
+        Op basis van dit studietempo heb je {{needed}} maanden nodig voor je P.</br>
+        <paper-button dialog-confirm autofocus>OK</paper-button>
+        <br/>
+      </paper-dialog>
+
+    <!--
+    <div>
+      <paper-input label="vakcode" value="{{vakcodeInput}}"></paper-input>
+      <paper-input label="ECTS" value="{{ECTSInput}}"></paper-input>
+      <paper-input label="datum" value="{{datumInput}}"></paper-input>
+      <paper-button raised on-click="addCourseHandler">Toevoegen</paper-button>
+    </div>
+    -->
+
+    <div id="content">
+    <div id="leftProgress">
+    <h1>Voortgang</h1>
+    <!--create the table-->
+    <table id="progressTable">
+      <thead>
+        <tr>
+      <th>Vakcode</th>
+      <th>ECTS</th>
+      <th>Datum behaald</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>TICT-V1PROG-15</td>
+        <td>5</td>
+        <td><input type="date" value="2016-11-10" class="date"></td>
+      </tr>
+      <tr>
+        <td>TICT-V1CSN-15</td>
+        <td>5</td>
+        <td><input type="date" value="2016-11-07" class="date"></td>
+      </tr>
+      <tr>
+        <td>TICT-V1ICOR-15</td>
+        <td>5</td>
+        <td><input type="date" value="2016-10-30" class="date"></td>
+      </tr>
+    </tbody>
+    </table>
+    <!--javascript button see progress.js-->
+    <button type="button" id="studyChartButton" onclick="calculation()"><b>Bereken studietempo</b></button>
+
+  </div>
+
+  </div>
+    <!--right side of the progress page with mag and graph-->
+      <div id="rightProgress">
+        <h3>Student:</h3>
+        <iframe id="map"
+          frameborder="0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDrxviFvdgZCmh2z2nIDYAigW-ODuZd2xU&q=Aalberselanen+1,Woerden">
+        </iframe>
+      <img src="images/graph.png" id="graphImg" alt="graph"/>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class VoortgangElement extends Polymer.Element {
+        static get is() {
+          return 'voortang-element';
+        }
+        static get properties() {
+          return {
+            sum: Number,
+            pace: Number,
+            needed: Number,
+            showDialoog: {
+              type: Boolean,
+              value: false
+            },
+            vakcodeInput: String,
+            ECTSInput: String,
+            datumInput: String,
+            cursussen: {
+              type: Array,
+              value: [
+                {vakcode: "TICT-V1PROG-15", ECTS: 5, datum: "11/10/2016"},
+                {vakcode: "TICT-V1CSN-15", ECTS: 5, datum: "11/07/2016"},
+                {vakcode: "TICT-V1ICOR-15", ECTS: 5, datum: "10/30/2016"}
+            ]
+          }
+        };
+      }
+      /*
+      addCourseHandler() {
+        this.cursussen.push({vakcode: this.vakcodeInput, ECTS: parseInt(this.ECTSInput), datum: this.datumInput});
+        console.log(this.cursussen);
+      }*/
+      showStudieTempo(){
+        var sum = this.berekendTotaalAantalECTS();
+        var months = this.berekendMaandVerschil();
+        var pace = sum / months;
+        var needed = (60 - sum) / pace;
+        this.pace = pace;
+        this.needed = needed;
+        this.$.myDialoogVenster.open();
+      }
+
+      berekendTotaalAantalECTS() {
+      var sumLocal = 0;
+      for (var i = 0; i < this.cursussen.length; i++) {
+          sumLocal += this.cursussen[i].ECTS;
+        }
+      this.sum = sumLocal;
+      return sumLocal
+      }
+
+      berekendMaandVerschil() {
+        var firstDate = Date.parse(this.cursussen[0].datum);
+        var now = Date.now();
+        var dateDifference = new Date(now - firstDate).getMonth();
+        return dateDifference
+      }
+    }
+
+
+    window.customElements.define(VoortgangElement.is, VoortgangElement);
+  </script>
+</dom-module>

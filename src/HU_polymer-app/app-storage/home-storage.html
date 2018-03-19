@@ -1,0 +1,21 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
+<dom-module id="home-storage">
+  <template>
+    <paper-input label="naam" value={{naam}}></paper-input>
+    <app-localstorage-document key="naam" data={{naam}}></app-localstorage-document>
+  </template>
+  <script>
+    class HomeStorage extends Polymer.Element{
+      static get is() { return 'home-storage'; }
+      static get properties(){
+        return {
+          naam: String
+        };
+      }
+    }
+    window.customElements.define(HomeStorage.is, HomeStorage);
+  </script>
+</dom-module>

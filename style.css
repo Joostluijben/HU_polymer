@@ -1,0 +1,202 @@
+/* apply to all html */
+html {
+  font-family: arial;
+  margin: 0;
+  padding: 0;
+  height: 100%
+}
+
+/* make sure there is no margin everywhere */
+body {
+  margin:0
+}
+
+/* style all the navigation */
+#navigation {
+  border-bottom: 10px solid #1179DC;
+  padding-bottom:0px
+}
+  #navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  #navigation li {
+    float: left;
+    margin-left: -1px;
+    margin-bottom: -1px;
+    background-color: white;
+    margin-top: 3%
+  }
+  #navigation li a {
+      text-align: center;
+      display: block;
+      padding: 20px;
+      text-decoration: none;
+      border: 0.5px solid black;
+      color: black;
+  }
+  /* style the active menu tab */
+  .active {
+    background-color: #1179DC;
+  }
+    li a.active {
+      color: white !important;
+    }
+    /* style the menu bar yellow and border color*/
+    #menuBar {
+      background-color: yellow;
+      border: 1px solid black
+    }
+      #user {
+        float: right;
+        margin-top: -7%;
+        margin-right: 2%
+      }
+        #user p {
+          float: left;
+          margin: center;
+          color: grey;
+        }
+        #user img {
+          height: 60px;
+        }
+
+#content {
+  margin-left: 2%
+}
+
+/* style the images on front page */
+#HULogo{
+  float:right;
+  height: 130px;
+  margin-right: 10%
+}
+
+#homeImg {
+  height: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* put left part of form on the left in settings page */
+#leftForm {
+    text-align: left;
+    float: left;
+    width: 50%;
+}
+
+/* put right part of form on the right in settings page */
+#rightForm {
+  float: right;
+  width: 50%;
+}
+  #rightForm  img{
+    display: inline;
+    margin-left: 50%;
+    border: 1px solid black;
+  }
+  #rightForm button {
+    display: inline;
+    margin-left: 50%;
+    border-radius: 25px;
+    border-color: black;
+    margin-top: 1%;
+    color: white;
+    background-color: blue;
+    padding: 1%;
+    width: 15%
+  }
+
+/* style all the input fields of the settings page */
+#settings {
+  height: 400px;
+}
+  #settings input {
+    margin-left: 50%;
+    display: inline;
+    border: 1px solid black;
+    padding: 5px;
+  }
+  #settings label {
+    display: inline;
+    float: left;
+    margin-right: 50%;
+  }
+  #inputMale {
+    margin-right: 0%;
+    position: relative;
+    display: inline;
+  }
+  #inputFemale {
+    margin-right: 30px;
+    display: inline;
+  }
+  #inputOther {
+    display: inline;
+  }
+
+
+/* style the table and button on the left side of the progress page */
+#leftProgress {
+  float: left;
+  width: 49%;
+}
+  #progressTable {
+    background-color: #D0E75A;
+    border: solid 2px black;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  #progressTable th, tr, td {
+      border: solid 1px black;
+      text-align: center;
+  }
+  #studyChartButton {
+    position: relative;
+    border: none;
+    box-shadow: 10px 5px 10px grey;
+    margin-top: 3%;
+    padding: 4%;
+    width: 50%;
+    font-size: 20px;
+    margin-left: 0;
+  }
+
+/* style the graph image and map on the right side of the progress page */
+#rightProgress {
+  float: right;
+  width: 49%;
+  text-align: center;
+  margin-top: 2%;
+}
+  #rightProgress h3 {
+    font-weight: normal
+  }
+  #map {
+    width: 70%;
+  }
+  #graphImg {
+    display: block;
+    margin: auto
+  }
+
+/* style the footer and let text float to the right */
+footer {
+  margin-top: 1%;
+  border-top: 2px solid black;
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
+  #footerRight {
+    margin-right: 20px;
+    float: right
+  }
+  #footerTop {
+    text-align: center;
+  }
